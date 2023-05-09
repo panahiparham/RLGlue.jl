@@ -4,3 +4,6 @@
 
 # ignore vscode
 .vscode
+
+# ignore julia manifest
+Manifest.toml
