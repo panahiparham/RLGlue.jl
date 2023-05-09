@@ -13,7 +13,7 @@ end
 
 
 """
-    step!(env::BaseEnvironment, action::Int) -> (r, o, t, extra) Tuple{Float64, Any, Bool, Dict{String, Any}}
+    step!(env::BaseEnvironment, action::Int) -> (r, o, t, extra)::Tuple{Float64, Any, Bool, Dict{String, Any}}
 """
 function step!(env::BaseEnvironment, action::Int)
     @error "Implement step! for $(typeof(env))"

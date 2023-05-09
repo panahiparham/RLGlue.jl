@@ -1,5 +1,13 @@
 
+"""
+Interaction - a struct to hold the results of an interaction with the environment
 
+    o::Any - observation
+    a::Union{Int, Nothing} - action
+    t::Bool - terminal
+    r::Float64 - reward
+    extra::Dict{String, Any} - extra information
+"""
 struct Interaction
     o::Any
     a::Union{Int, Nothing}
@@ -9,7 +17,19 @@ struct Interaction
 end
 
 
-mutable  struct Glue
+"""
+Glue - a struct to hold the RL-Glue information
+
+    environment::BaseEnvironment
+    agent::BaseAgent
+
+    last_action::Union{Int, Nothing}
+    total_reward::Float64
+    num_steps::Int
+    total_steps::Int
+    num_episodes::Int
+"""
+mutable struct Glue
     environment::BaseEnvironment
     agent::BaseAgent
 
@@ -27,7 +47,9 @@ end
 
 
 
-
+"""
+    start!(glue::Glue) -> (s, a)::Tuple{Any, Union{Int, Nothing}}
+"""
 function start!(glue::Glue)
     glue.num_steps = 0
     glue.total_reward = 0.0
@@ -40,6 +62,9 @@ function start!(glue::Glue)
 end
 
 
+"""
+    step!(glue::Glue) -> interaction::Interaction
+"""
 function step!(glue::Glue)
     @assert glue.last_action !== nothing "Action is nothing; make sure to call start!(glue) before calling step!(glue)"
 
@@ -60,6 +85,9 @@ function step!(glue::Glue)
 end
 
 
+"""
+    runEpisode!(glue::Glue, max_steps::Int = 0) -> is_terminal::Bool
+"""
 function runEpisode!(glue::Glue, max_steps::Int = 0)
     is_terminal = false
 
